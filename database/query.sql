@@ -1,51 +1,49 @@
-/* SQLEditor (Generic SQL)*/
-
 CREATE TABLE page
 (
-page_id VARCHAR,
-page_name VARCHAR,
+page_id VARCHAR(100),
+page_name VARCHAR(250),
 page_likes INTEGER,
 PRIMARY KEY (page_id)
 );
 
 CREATE TABLE page_post
 (
-post_id VARCHAR,
-message VARCHAR,
+post_id VARCHAR(100),
+message VARCHAR(1000),
 created_time DATE,
 shares_count INTEGER,
-like_ids VARCHAR,
-page_id VARCHAR,
+like_ids VARCHAR(5000),
+page_id VARCHAR(100),
 PRIMARY KEY (post_id)
 );
 
 CREATE TABLE page_twitter
 (
-page_id VARCHAR,
-page_name VARCHAR,
+page_id VARCHAR(100),
+page_name VARCHAR(250),
 page_followers INTEGER,
 PRIMARY KEY (page_id)
 );
 
 CREATE TABLE page_tweets
 (
-tweet_id VARCHAR,
-tweet_text VARCHAR,
+tweet_id VARCHAR(100),
+tweet_text VARCHAR(250),
 created_time DATE,
 retweet_count INTEGER,
-favourites_ids VARCHAR,
-page_id VARCHAR,
-PRIMARY KEY (post_id)
+favourites_ids VARCHAR(5000),
+page_id VARCHAR(100),
+PRIMARY KEY (tweet_id)
 );
 
 CREATE TABLE post_comments
 (
-comment_id VARCHAR,
-post_id VARCHAR,
-comment_message VARCHAR,
+comment_id VARCHAR(100),
+post_id VARCHAR(100),
+comment_message VARCHAR(5000),
 likes_count INTEGER,
 created_time DATE,
-page_id VARCHAR,
+page_id VARCHAR(100),
 PRIMARY KEY (comment_id)
 );
 
