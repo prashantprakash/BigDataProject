@@ -43,9 +43,9 @@
             <name><![CDATA[page_id]]></name>
             <type><![CDATA[VARCHAR]]></type>
             <referencesField>page_id</referencesField>
-            <referencesTable>page</referencesTable>
+            <referencesTable>page_facebook</referencesTable>
             <referencesField><![CDATA[page_id]]></referencesField>
-            <referencesTable><![CDATA[page]]></referencesTable>
+            <referencesTable><![CDATA[page_facebook]]></referencesTable>
             <sourceCardinality>0</sourceCardinality>
             <destinationCardinality>0</destinationCardinality>
             <referencesFieldUID><![CDATA[CF721F5F-9A51-4710-A5DA-062F7E8D836A]]></referencesFieldUID>
@@ -54,6 +54,40 @@
         </SQLField>
         <ui.treeExpanded><![CDATA[1]]></ui.treeExpanded>
         <uid><![CDATA[10FCB3E4-1FEF-4D26-AC8D-5D7BF24D1D12]]></uid>
+    </SQLTable>
+    <SQLTable>
+        <name><![CDATA[user]]></name>
+        <schema><![CDATA[]]></schema>
+        <location>
+            <x>368.00</x>
+            <y>376.00</y>
+        </location>
+        <size>
+            <width>200.00</width>
+            <height>100.00</height>
+        </size>
+        <zorder>5</zorder>
+        <SQLField>
+            <name><![CDATA[user_id]]></name>
+            <type><![CDATA[VARCHAR]]></type>
+            <uid><![CDATA[717B58F0-DF6A-4250-AD37-BB111471E1B1]]></uid>
+        </SQLField>
+        <SQLField>
+            <name><![CDATA[user_name]]></name>
+            <type><![CDATA[VARCHAR]]></type>
+            <uid><![CDATA[AD048CE2-1C86-4832-BA2D-8FC34C0D4DB7]]></uid>
+        </SQLField>
+        <SQLField>
+            <name><![CDATA[lat]]></name>
+            <type><![CDATA[VARCHAR]]></type>
+            <uid><![CDATA[3FB914D6-54FB-4B64-B454-9301A0897538]]></uid>
+        </SQLField>
+        <SQLField>
+            <name><![CDATA[lang]]></name>
+            <type><![CDATA[VARCHAR]]></type>
+            <uid><![CDATA[DDCD8991-BFD9-45FC-95CC-318C28A93BAA]]></uid>
+        </SQLField>
+        <uid><![CDATA[7935AD7E-0CDB-4BF2-9F3A-E4745E5CF3D7]]></uid>
     </SQLTable>
     <SQLTable>
         <name><![CDATA[page_twitter]]></name>
@@ -138,9 +172,9 @@
             <name><![CDATA[page_id]]></name>
             <type><![CDATA[VARCHAR]]></type>
             <referencesField>page_id</referencesField>
-            <referencesTable>page</referencesTable>
+            <referencesTable>page_facebook</referencesTable>
             <referencesField><![CDATA[page_id]]></referencesField>
-            <referencesTable><![CDATA[page]]></referencesTable>
+            <referencesTable><![CDATA[page_facebook]]></referencesTable>
             <sourceCardinality>0</sourceCardinality>
             <destinationCardinality>0</destinationCardinality>
             <referencesFieldUID><![CDATA[CF721F5F-9A51-4710-A5DA-062F7E8D836A]]></referencesFieldUID>
@@ -207,14 +241,14 @@
         <uid><![CDATA[C00422A3-7945-4265-9647-C6F074F4A749]]></uid>
     </SQLTable>
     <SQLTable>
-        <name><![CDATA[page]]></name>
+        <name><![CDATA[page_facebook]]></name>
         <schema><![CDATA[]]></schema>
         <location>
             <x>17.00</x>
             <y>120.00</y>
         </location>
         <size>
-            <width>199.00</width>
+            <width>192.00</width>
             <height>80.00</height>
         </size>
         <zorder>2</zorder>
@@ -403,9 +437,9 @@ mZkLTlNQYXBlck5hbWWGkoSZmQluYS1sZXR0ZXKGhoY=
         <snapToGrid><![CDATA[0]]></snapToGrid>
         <SourceSidebarWidth><![CDATA[276.000000]]></SourceSidebarWidth>
         <uid><![CDATA[2702C7C1-69A7-4FCE-BDAA-8D92F0F46619]]></uid>
-        <windowHeight><![CDATA[817.000000]]></windowHeight>
+        <windowHeight><![CDATA[815.000000]]></windowHeight>
         <windowLocationX><![CDATA[0.000000]]></windowLocationX>
-        <windowLocationY><![CDATA[60.000000]]></windowLocationY>
+        <windowLocationY><![CDATA[62.000000]]></windowLocationY>
         <windowScrollOrigin><![CDATA[{0, 0}]]></windowScrollOrigin>
         <windowWidth><![CDATA[1440.000000]]></windowWidth>
     </SQLDocumentInfo>
