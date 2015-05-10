@@ -24,7 +24,7 @@ def parse_json():
     subway_pageid = "224383614973"
     dominos_pageid = "6657899956"
     post_message = "Worst sub ever"
-    folder_path='''/Users/Dany/Documents/FALL-2013-COURSES/Imp_Data_structures/workspace/big-data/BigDataProject/dataset/facebook/food-beverages/dominos/'''
+    folder_path='''/Users/Dany/Documents/FALL-2013-COURSES/Imp_Data_structures/workspace/big-data/BigDataProject/dataset/facebook/food-beverages/subway/'''
     for file_name in os.listdir(folder_path):
     	if file_name != ".DS_Store":
             with open(folder_path+file_name) as json_file:
@@ -55,10 +55,10 @@ def parse_json():
                         like_ids = like_ids + "["+str(like_id)+"::"+str(liked_by_name)+"],"
                         print "Liked by "+liked_by_name + '\n'
                         #insert_user(like_id, liked_by_name,"", "")
-                        insert_like_user_activity(like_id, liked_by_name, 1, 0, "", "")
+                        insert_like_user_activity(like_id, liked_by_name, 1, 0, "", "", subway_pageid)
                     like_ids = like_ids + "]"
                     #Insert post into table
-                insert_post(post_id, post_message, parse_date(created_time), share_count, like_ids, dominos_pageid)
+                insert_post(post_id, post_message, parse_date(created_time), share_count, like_ids, subway_pageid)
 
                 if 'comments' in post:
                     comment_info = post['comments']
@@ -79,14 +79,14 @@ def parse_json():
                             if 'created_time' in comment:
                                 created_time = comment['created_time']
                             print "Commented by "+str(commented_by_name)
-                            insert_comment_user_activity(commented_by_id, commented_by_name, 0, 1, "", "")
-                            insert_comment(comment_id, post_id, comment_message, likes_count, parse_date(created_time), dominos_pageid)
+                            insert_comment_user_activity(commented_by_id, commented_by_name, 0, 1, "", "", subway_pageid)
+                            insert_comment(comment_id, post_id, comment_message, likes_count, parse_date(created_time), subway_pageid)
 
 def get_connection_object():
     db = MySQLdb.connect(host="localhost", # your host, usually localhost
                          user="root", # your username
                          passwd="", # your password
-                         db="rivalroasters") # name of the data base
+                         db="rivalrooster") # name of the data base
     return db
 
 
@@ -146,27 +146,27 @@ def insert_user(user_id, user_name, lat, long):
     
     conn.close()
 
-def insert_like_user_activity(user_id, user_name, like_count, comment_count, lat, long):
+def insert_like_user_activity(user_id, user_name, like_count, comment_count, lat, long, page_id):
     conn = get_connection_object()
     
     # you must create a Cursor object. It will let
     #  you execute all the queries you need
     cur = conn.cursor()
     try:
-        cur.execute("""INSERT INTO fb_user_activity (user_id, user_name, like_count, comment_count, latitude, longitude) VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE like_count=like_count+1""",(user_id, user_name, int(like_count), int(comment_count), lat, long))
+        cur.execute("""INSERT INTO fb_user_activity (user_id, page_id, user_name, like_count, comment_count, latitude, longitude) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE like_count=like_count+1""",(user_id, page_id, user_name, int(like_count), int(comment_count), lat, long))
         conn.commit()
     except:
         conn.rollback()
 
     conn.close()
 
-def insert_comment_user_activity(user_id, user_name, like_count, comment_count, lat, long):
+def insert_comment_user_activity(user_id, user_name, like_count, comment_count, lat, long, page_id):
     conn = get_connection_object()
     # you must create a Cursor object. It will let
     #  you execute all the queries you need
     cur = conn.cursor()
     try:
-        cur.execute("""INSERT INTO fb_user_activity (user_id, user_name, like_count, comment_count, latitude, longitude) VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE comment_count=comment_count+1""",(user_id, user_name, int(like_count), int(comment_count), lat, long))
+        cur.execute("""INSERT INTO fb_user_activity (user_id, page_id, user_name, like_count, comment_count, latitude, longitude) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE comment_count=comment_count+1""",(user_id, page_id, user_name, int(like_count), int(comment_count), lat, long))
         
         conn.commit()
     except:
@@ -182,7 +182,7 @@ def parse_date(date_val):
     return parsed_val
 
 
-#INSERT INTO fb_user_activity (user_id, user_name, like_count, comment_count, latitude, longitude) VALUES ("769615923057745", "Dinesh Appavoo", 0, 1, "", "") ON DUPLICATE KEY UPDATE comment_count=comment_count+1;
+#INSERT INTO fb_user_activity (user_id, user_name, like_count, comment_count, latitude, longitude, page_id) VALUES ("769615923057747", "Dinesh Appavoo", 0, 1, "", "", "6657899956") ON DUPLICATE KEY UPDATE comment_count=comment_count+1;
 #INSERT INTO fb_user_activity (user_id, user_name, like_count, comment_count, latitude, longitude) VALUES ("769615923057745", "Dinesh Appavoo", 1, 0, "", "") ON DUPLICATE KEY UPDATE like_count=like_count+1;
 
 #INSERT INTO page_post(post_id, message, created_time, shares_count, like_ids, page_id) VALUES ("123", "ifjerifg edjhgdfjg ighdgid", "07/29/2014", 4, "[[34324::feere]]", "224383614973");

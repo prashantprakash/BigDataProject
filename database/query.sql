@@ -29,12 +29,13 @@ PRIMARY KEY (page_id)
 CREATE TABLE fb_user_activity
 (
 user_id VARCHAR(255),
+page_id VARCHAR(255),
 user_name VARCHAR(2083),
 like_count INTEGER,
 comment_count INTEGER,
 latitude VARCHAR(255),
 longitude VARCHAR(255),
-PRIMARY KEY (user_id)
+PRIMARY KEY (user_id, page_id)
 );
 
 CREATE TABLE page_tweets
@@ -75,3 +76,6 @@ ALTER TABLE page_tweets ADD FOREIGN KEY (page_id) REFERENCES page_twitter (page_
 ALTER TABLE post_comments ADD FOREIGN KEY (post_id) REFERENCES page_post (post_id);
 
 ALTER TABLE post_comments ADD FOREIGN KEY (page_id) REFERENCES page_facebook (page_id);
+
+ALTER TABLE fb_user_activity ADD FOREIGN KEY (page_id) REFERENCES page_facebook (page_id);
+
