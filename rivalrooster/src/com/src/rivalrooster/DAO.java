@@ -87,9 +87,9 @@ public class DAO {
 	 * 
 	 * 
 	 */
-	public GraphVO topkUsers(String pageID, int k) {
+	public UserGraphVO topkUsers(String pageID, int k) {
 		Connection conn = null;
-		GraphVO graphVO = new GraphVO();
+		UserGraphVO graphVO = new UserGraphVO();
 		try {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");

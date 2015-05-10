@@ -21,13 +21,15 @@
 <script type="text/javascript" src="js/jqplot.barRenderer.min.js"></script>
 <script type="text/javascript"
 	src="js/jqplot.categoryAxisRenderer.min.js"></script>
-<!-- <script type="text/javascript" src="js/jqplot.pointLabels.min.js"></script> -->
+  
 <!-- <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script> -->
 <script src="js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="js/jqplot.highlighter.min.js"></script>
 <script type="text/javascript" src="js/jqplot.canvasTextRenderer.min.js"></script>
 <script type="text/javascript" src="js/jqplot.canvasAxisTickRenderer.min.js"></script>
+<script type="text/javascript" src="js/FlexGauge.js"></script>
+<!--  <script type="text/javascript" src="js/jqplot.pointLabels.min.js"></script>-->
 <!-- Custom CSS -->
 <link href="css/sb-admin.css" rel="stylesheet">
 <!-- Custom Fonts -->
@@ -41,6 +43,19 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     
+ <style type="text/css">
+ 
+ 	.fg-dial {
+                font-size: 200%;
+                font-weight: bold;
+                left: 0;
+                position: absolute;
+                text-align: center;
+                top: 100px;
+                width: 100%;
+            }
+ </style>
+    
     <script>
     $(document).ready(function(){
     	var s1 = [20,25,30,40,10,35,40];
@@ -52,7 +67,60 @@
     	plotBarChart('chart2',ticks,s2);
     	plotLineChart('chart3',l6,ticks1);
     	plotLineChart('chart4',l6,ticks1);
+    	
+    	var u1 = [2, 6, 7, 10];
+        var u2 = [7, 5, 3, 2];
+        var tickuser= ["pp","pp","pp","pp"];
+        plottopKUsersChart('chart5',u1,u2,tickuser)
+        plottopKUsersChart('chart6',u1,u2,tickuser)
+        var gauge = new FlexGauge({
+        	appendTo: '#chartleft',
+        	dialValue: true,
+        	arcFillInt: 20,
+            arcFillTotal: 45
+        });
+        
+        var gauge = new FlexGauge({
+        	appendTo: '#chartright',
+        	dialValue: true,
+        	arcFillInt: 10,
+            arcFillTotal: 45
+        });
+         
     });
+    
+    
+    function plottopKUsersChart(chart , u1 , u2,ticks) {
+    	plot3 = $.jqplot(chart, [u1, u2], {
+    		stackSeries: true,
+            captureRightClick: true,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer,
+                shadowAngle: 135,
+                rendererOptions: {
+                    barDirection: 'vertical',
+                    highlightMouseDown: true   
+                },
+                pointLabels: {show: true, formatString: '%d'}
+            },
+            series: [
+         	        {label: 'likes'}
+         	       ],
+            legend: {
+                show: true,
+                location: 'e',
+                placement: 'inside'
+            },
+            axes: {
+                xaxis: {
+                	ticks: ticks,
+                    renderer: $.jqplot.CategoryAxisRenderer
+                }
+            }
+        });
+     
+        
+    }
     
     function plotLineChart(chart,l6,ticks) {
     	plot2 = $.jqplot(chart,[l6],{
@@ -101,7 +169,7 @@
     	            // Figure out where to position the tooltip.
     	            var h = elem.outerHeight();
     	            var w = elem.outerWidth();
-    	            var left = ev.pageX - w - 10;
+    	            var left = ev.pageX - w - 10 +800;
     	            var top = ev.pageY - h - 10;
     	            // now stop any currently running animation, position the tooltip, and fade in.
     	            elem.stop(true, true).css({left:left, top:top}).fadeIn(200);
@@ -146,10 +214,41 @@
 </head>
 <body>
 	<div id="wrapper" style="padding-left: 0px;">
-		<div id="page-wrapper">
+		<div id="page-wrapper" style="padding-left: 10%; padding-right: 10%;">
 			<div id="customTooltipDiv">
 			</div>
 			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="panel panel-green">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<i class="fa fa-clock-o fa-fw"></i> Overall Score
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div id="chartleft" style="margin-left:24%;"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="panel panel-green">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<i class="fa fa-clock-o fa-fw"></i> Overall Score
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div id="chartright" style="margin-left:24%;"></div>
+							</div>
+						</div>
+					</div>
+
+				</div> <!-- end of gauge row -->
+								
+				
+				
+				
 				<div class="row">
 					<div class="col-xs-6">
 						<div class="panel panel-green">
@@ -205,6 +304,34 @@
 					</div>
 
 				</div> <!-- end of row2 -->
+				
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="panel panel-green">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<i class="fa fa-clock-o fa-fw"></i> top 10 users
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div id="chart5"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="panel panel-green">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<i class="fa fa-clock-o fa-fw"></i> top 10 users
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div id="chart6"></div>
+							</div>
+						</div>
+					</div>
+
+				</div> <!-- end of row3 -->
 
 			</div>
 			<!-- end of container -->
