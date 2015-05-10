@@ -14,6 +14,7 @@ created_time DATE,
 shares_count INTEGER,
 like_ids VARCHAR(2083),
 page_id VARCHAR(255),
+sentiment VARCHAR(255),
 PRIMARY KEY (post_id)
 );
 
@@ -23,6 +24,17 @@ page_id VARCHAR(255),
 page_name VARCHAR(2083),
 page_followers INTEGER,
 PRIMARY KEY (page_id)
+);
+
+CREATE TABLE fb_user_activity
+(
+user_id VARCHAR(255),
+user_name VARCHAR(2083),
+like_count INTEGER,
+comment_count INTEGER,
+latitude VARCHAR(255),
+longitude VARCHAR(255),
+PRIMARY KEY (user_id)
 );
 
 CREATE TABLE page_tweets
@@ -44,6 +56,7 @@ comment_message VARCHAR(2083),
 likes_count INTEGER,
 created_time DATE,
 page_id VARCHAR(255),
+sentiment VARCHAR(255),
 PRIMARY KEY (comment_id)
 );
 
