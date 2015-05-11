@@ -1,0 +1,66 @@
+SELECT * FROM rivalrooster.page_post;
+
+select count(*) from page_post where Sentiment ='negative';
+
+select count(*) from post_comments where Sentiment ='negative';
+select * from tweets;
+select count(*) from tweets;
+select count(*) from retweets;
+select count(*) from tweetreplies;
+select count(*) from followers;
+select count(*) from page;
+select * from page_post ;
+select count(*) from page_post where Sentiment ='positive' and Page_id='224383614973'
+Union
+select count(*) from page_post where Sentiment ='negative' and Page_id='224383614973';
+select * from post_comments;
+
+select count(*) from post_comments where Sentiment ='positive'
+Union
+select count(*) from post_comments where Sentiment ='negative';
+
+select count(*) from post_comments where Sentiment is not null ;
+
+
+select  user_name,like_count, comment_count from fb_user_activity 
+where Page_id='50245567013' and like_count!=0 and comment_count!=0 
+order by (like_count+comment_count) 
+desc limit 10;
+
+select DATE_FORMAT(created_time,'%y-%m') , count(*) 
+from page_post where page_id='50245567013' group by DATE_FORMAT(created_time,'%y-%m') 
+order by DATE_FORMAT(created_time,'%y-%m') desc limit 6;
+
+select DATE_FORMAT(created_time,'%y-%m') , count(*)  
+from post_comments where page_id='50245567013' 
+group by DATE_FORMAT(created_time,'%y-%m') 
+order by DATE_FORMAT(created_time,'%y-%m') desc limit 6;
+
+select * from page_facebook where page_id='224383614973';
+select sum(like_count) + sum(comment_count) from fb_user_activity 
+where page_id='224383614973' union all 
+select Max(temp.sumcount) from 
+(select sum(like_count) + sum(comment_count) as sumcount 
+from fb_user_activity group by page_id ) as temp
+
+select page_likes from page_facebook where page_id='224383614973'
+union all select max(page_likes) from page_facebook;
+
+select distinct page_id from page_post;
+
+
+
+select  user_name,like_count, comment_count from 
+fb_user_activity where Page_id='224383614973' and 
+like_count!=0 and comment_count!=0 
+order by (like_count+comment_count) desc limit 10;
+
+select page_likes from page_facebook where page_id='224383614973'union all 
+select max(page_likes) from page_facebook;
+
+
+
+select DATE_FORMAT(created_time,'%y-%m') , count(*) 
+from page_post where page_id='224383614973' 
+group by DATE_FORMAT(created_time,'%y-%m') 
+order by DATE_FORMAT(created_time,'%y-%m') desc limit 6; 
