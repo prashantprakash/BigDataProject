@@ -1,0 +1,12 @@
+SELECT * FROM rivalrooster.tweets;
+
+select * from rivalrooster.tweets 
+order by DATE_FORMAT(createdtime) desc ;
+
+select count(*) from tweets;
+select * from tweets;
+
+describe tweets;
+describe tweetreplies;
+describe followers;
+describe retweets;
