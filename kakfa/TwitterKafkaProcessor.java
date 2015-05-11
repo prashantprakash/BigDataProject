@@ -17,6 +17,7 @@
 
 package org.apache.spark.examples.streaming;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Arrays;
@@ -25,6 +26,7 @@ import java.util.regex.Pattern;
 import scala.Tuple2;
 
 import com.google.common.collect.Lists;
+
 import kafka.serializer.StringDecoder;
 
 import org.apache.spark.SparkConf;
@@ -46,6 +48,118 @@ import org.apache.spark.streaming.Durations;
 public final class JavaDirectKafkaWordCount {
   private static final Pattern SPACE = Pattern.compile(" ");
 
+  class Page{
+	  String pageId;
+	  ArrayList<String> followers;
+	/**
+	 * @return the pageId
+	 */
+	public String getPageId() {
+		return pageId;
+	}
+	/**
+	 * @param pageId the pageId to set
+	 */
+	public void setPageId(String pageId) {
+		this.pageId = pageId;
+	}
+	/**
+	 * @return the followers
+	 */
+	public ArrayList<String> getFollowers() {
+		return followers;
+	}
+	/**
+	 * @param followers the followers to set
+	 */
+	public void setFollowers(ArrayList<String> followers) {
+		this.followers = followers;
+	}
+  }
+  class Tweet{
+	  String tweetId;
+	  String tweetMessage;
+	  int noOfRetweets;
+	  String replyId;
+	/**
+	 * @return the tweetId
+	 */
+	public String getTweetId() {
+		return tweetId;
+	}
+	/**
+	 * @param tweetId the tweetId to set
+	 */
+	public void setTweetId(String tweetId) {
+		this.tweetId = tweetId;
+	}
+	/**
+	 * @return the tweetMessage
+	 */
+	public String getTweetMessage() {
+		return tweetMessage;
+	}
+	/**
+	 * @param tweetMessage the tweetMessage to set
+	 */
+	public void setTweetMessage(String tweetMessage) {
+		this.tweetMessage = tweetMessage;
+	}
+	/**
+	 * @return the noOfRetweets
+	 */
+	public int getNoOfRetweets() {
+		return noOfRetweets;
+	}
+	/**
+	 * @param noOfRetweets the noOfRetweets to set
+	 */
+	public void setNoOfRetweets(int noOfRetweets) {
+		this.noOfRetweets = noOfRetweets;
+	}
+	/**
+	 * @return the replyId
+	 */
+	public String getReplyId() {
+		return replyId;
+	}
+	/**
+	 * @param replyId the replyId to set
+	 */
+	public void setReplyId(String replyId) {
+		this.replyId = replyId;
+	}
+  }
+  
+  class ReTweet{
+	  String reTweetId;
+	  String message;
+	/**
+	 * @return the reTweetId
+	 */
+	public String getReTweetId() {
+		return reTweetId;
+	}
+	/**
+	 * @param reTweetId the reTweetId to set
+	 */
+	public void setReTweetId(String reTweetId) {
+		this.reTweetId = reTweetId;
+	}
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	  
+  }
   public static void main(String[] args) {
     if (args.length < 2) {
       System.err.println("Usage: DirectKafkaWordCount <brokers> <topics>\n" +

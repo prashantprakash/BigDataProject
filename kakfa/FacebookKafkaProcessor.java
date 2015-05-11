@@ -52,11 +52,68 @@ import org.apache.spark.streaming.kafka.KafkaUtils;
  *    zoo03 my-consumer-group topic1,topic2 1`
  */
 
-public final class JavaKafkaWordCount {
+public final class FacebookKafkaProcessor {
   private static final Pattern SPACE = Pattern.compile(" ");
 
-  private JavaKafkaWordCount() {
+  private FacebookKafkaProcessor() {
   }
+    
+    
+    class FacebookPost{
+        String postId;
+        String messsage;
+        int likeCount;
+        int shareCount;
+		/**
+		 * @return the postId
+		 */
+		public String getPostId() {
+			return postId;
+		}
+		/**
+		 * @param postId the postId to set
+		 */
+		public void setPostId(String postId) {
+			this.postId = postId;
+		}
+		/**
+		 * @return the messsage
+		 */
+		public String getMesssage() {
+			return messsage;
+		}
+		/**
+		 * @param messsage the messsage to set
+		 */
+		public void setMesssage(String messsage) {
+			this.messsage = messsage;
+		}
+		/**
+		 * @return the likeCount
+		 */
+		public int getLikeCount() {
+			return likeCount;
+		}
+		/**
+		 * @param likeCount the likeCount to set
+		 */
+		public void setLikeCount(int likeCount) {
+			this.likeCount = likeCount;
+		}
+		/**
+		 * @return the shareCount
+		 */
+		public int getShareCount() {
+			return shareCount;
+		}
+		/**
+		 * @param shareCount the shareCount to set
+		 */
+		public void setShareCount(int shareCount) {
+			this.shareCount = shareCount;
+		}
+        
+    }
 
   public static void main(String[] args) {
     if (args.length < 4) {
