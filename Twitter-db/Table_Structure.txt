@@ -1,0 +1,9 @@
+TwitterDataPages.txt : pageID,Description,Location,FollowesCount,Name
+
+TwitterFollowerDetails.txt : PageId, FollowersID, ScreenName, Location
+
+TwitterReplies.txt: Tweetid, TweetText, TweetReply, UserId, ScreenName, location, createdTime,Pagename
+
+TwitterRetweetDetails.txt: TweetId, RetweetId, screen name, location
+
+TwitterTweets.txt: TweetId, TweetText, CreatedTime, RetweetCount, FavouriteCount, PageName
