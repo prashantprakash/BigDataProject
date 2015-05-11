@@ -1,0 +1,11 @@
+LOAD DATA INFILE '/Users/Ashwini/TwitterData/Data/TwitterDataPages.txt' INTO TABLE Page
+FIELDS TERMINATED BY ':::';
+
+LOAD DATA INFILE '/Users/Ashwini/TwitterData/Data/TwitterFollowerDetails.txt' INTO TABLE Followers FIELDS TERMINATED BY ':::';
+
+LOAD DATA INFILE '/Users/Ashwini/TwitterData/Data/TwitterRetweetDetails.txt' INTO TABLE Retweets FIELDS TERMINATED BY ':::';
+
+LOAD DATA INFILE '/Users/Ashwini/TwitterData/Data/TwitterReplies.txt' INTO TABLE TweetReplies FIELDS TERMINATED BY ':::';
+
+LOAD DATA INFILE '/Users/Ashwini/TwitterData/Data/TwitterTweets.txt' INTO TABLE Tweets
+FIELDS TERMINATED BY ':::';
