@@ -8,6 +8,7 @@ public class UserGraphVO {
 	private List<String> xticks = new ArrayList<String>();
 	private List<Integer> values1 = new ArrayList<Integer>();
 	private List<Integer> values2 = new ArrayList<Integer>();
+	private List<Integer> values3 = new ArrayList<Integer>();
 
 	public List<String> getXticks() {
 		return xticks;
@@ -31,6 +32,14 @@ public class UserGraphVO {
 
 	public void setValues2(List<Integer> values2) {
 		this.values2 = values2;
+	}
+
+	public List<Integer> getValues3() {
+		return values3;
+	}
+
+	public void setValues3(List<Integer> values3) {
+		this.values3 = values3;
 	}
 
 }
