@@ -17,14 +17,16 @@ import time
 #license             = "MIT"
 
 #==============================================================================
+pizzahut_pageid = "6053772414"
+papajohn_pageid = "34703237638"
+mcdonald_pageid = "50245567013"
+subway_pageid = "224383614973"
+dominos_pageid = "6657899956"
+
 def parse_json():
-    pizzahut_pageid = "6053772414"
-    papajohn_pageid = "34703237638"
-    mcdonald_pageid = "50245567013"
-    subway_pageid = "224383614973"
-    dominos_pageid = "6657899956"
     post_message = "Worst sub ever"
-    folder_path='''/Users/Dany/Documents/FALL-2013-COURSES/Imp_Data_structures/workspace/big-data/BigDataProject/dataset/facebook/food-beverages/subway/'''
+    page_id_val = dominos_pageid
+    folder_path='''/Users/Dany/Documents/FALL-2013-COURSES/Imp_Data_structures/workspace/big-data/BigDataProject/dataset/facebook/food-beverages/dominos/'''
     for file_name in os.listdir(folder_path):
     	if file_name != ".DS_Store":
             with open(folder_path+file_name) as json_file:
@@ -55,10 +57,10 @@ def parse_json():
                         like_ids = like_ids + "["+str(like_id)+"::"+str(liked_by_name)+"],"
                         print "Liked by "+liked_by_name + '\n'
                         #insert_user(like_id, liked_by_name,"", "")
-                        insert_like_user_activity(like_id, liked_by_name, 1, 0, "", "", subway_pageid)
+                        insert_like_user_activity(like_id, liked_by_name, 1, 0, "", "", page_id_val)
                     like_ids = like_ids + "]"
                     #Insert post into table
-                insert_post(post_id, post_message, parse_date(created_time), share_count, like_ids, subway_pageid)
+                insert_post(post_id, post_message, parse_date(created_time), share_count, like_ids, page_id_val)
 
                 if 'comments' in post:
                     comment_info = post['comments']
@@ -79,8 +81,8 @@ def parse_json():
                             if 'created_time' in comment:
                                 created_time = comment['created_time']
                             print "Commented by "+str(commented_by_name)
-                            insert_comment_user_activity(commented_by_id, commented_by_name, 0, 1, "", "", subway_pageid)
-                            insert_comment(comment_id, post_id, comment_message, likes_count, parse_date(created_time), subway_pageid)
+                            insert_comment_user_activity(commented_by_id, commented_by_name, 0, 1, "", "", page_id_val)
+                            insert_comment(comment_id, post_id, comment_message, likes_count, parse_date(created_time), page_id_val)
 
 def get_connection_object():
     db = MySQLdb.connect(host="localhost", # your host, usually localhost
@@ -177,7 +179,7 @@ def insert_comment_user_activity(user_id, user_name, like_count, comment_count, 
 def parse_date(date_val):
     timestamp = date_val
     ts = time.strptime(timestamp[:19], "%Y-%m-%dT%H:%M:%S")
-    parsed_val = time.strftime("%Y-%m-%d", ts)
+    parsed_val = time.strftime("%Y-%m-%d %H:%M:%S", ts)
     print(parsed_val)
     return parsed_val
 

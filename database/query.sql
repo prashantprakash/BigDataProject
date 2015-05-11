@@ -10,7 +10,7 @@ CREATE TABLE page_post
 (
 post_id VARCHAR(255),
 message VARCHAR(2083),
-created_time DATE,
+created_time DATETIME,
 shares_count INTEGER,
 like_ids VARCHAR(2083),
 page_id VARCHAR(255),
@@ -55,7 +55,7 @@ comment_id VARCHAR(255),
 post_id VARCHAR(255),
 comment_message VARCHAR(2083),
 likes_count INTEGER,
-created_time DATE,
+created_time DATETIME,
 page_id VARCHAR(255),
 sentiment VARCHAR(255),
 PRIMARY KEY (comment_id)
